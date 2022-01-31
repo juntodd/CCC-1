@@ -1,0 +1,30 @@
+T = input()
+S = input()
+slen = len(S)
+tlen = len(T)
+charnum = 0
+DS = S + S
+for i in range(slen):
+    charnum += ord(T[i]) - ord(S[i])
+
+def iscycle(mystring):
+    if mystring in DS:
+        return True
+    return False
+
+
+if charnum == 0 and iscycle(T[0:slen]):
+    print("yes")
+else:
+    findone = False
+    for i in range(slen, tlen):
+        charnum -= ord(T[i-slen])
+        charnum += ord(T[i])
+        if charnum == 0 and iscycle(T[i-slen+1:i+1]):
+            findone = True
+            print("yes")
+            break
+    if not findone:
+        print("no")
+
+
